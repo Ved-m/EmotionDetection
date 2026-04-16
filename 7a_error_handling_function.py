@@ -15,21 +15,13 @@ def detect_emotion(text):
     
     Returns:
         dict: A dictionary containing emotion scores formatted to 3 decimal places
-              For successful response (status_code 200):
-              {
-                  'status_code': 200,
-                  'emotions': {...},
-                  'message': 'Success'
-              }
+              Keys: anger, disgust, fear, joy, sadness
               
-              For error responses:
-              {
-                  'error': 'Error message',
-                  'status_code': 400,  # or 401, 500, 503, etc.
-                  'message': 'HTTP status message'
-              }
+    Raises:
+        ValueError: If text input is invalid (None or not a string)
+        Exception: If Watson API fails
     """
-    # Input validation for status code 400 (Bad Request)
+    # Input validation for status code 400
     if text is None:
         return {
             'error': 'Invalid input: Text cannot be None',
@@ -121,3 +113,44 @@ def detect_emotion(text):
             'status_code': 500,
             'message': 'Internal Server Error - Unexpected exception occurred'
         }
+
+
+def validate_emotion_text(text):
+    """
+    Validate text input for emotion detection
+    
+    Args:
+        text: The text to validate
+    
+    Returns:
+        tuple: (is_valid: bool, error_response: dict or None)
+    """
+    # Check if text is None
+    if text is None:
+        return False, {
+            'error': 'Invalid input: Text cannot be None',
+            'status_code': 400
+        }
+    
+    # Check if text is a string
+    if not isinstance(text, str):
+        return False, {
+            'error': f'Invalid input type: Expected string, got {type(text).__name__}',
+            'status_code': 400
+        }
+    
+    # Check if text is empty
+    if len(text.strip()) == 0:
+        return False, {
+            'error': 'Invalid input: Text cannot be empty',
+            'status_code': 400
+        }
+    
+    # Check text length (optional validation)
+    if len(text) > 10000:
+        return False, {
+            'error': 'Text too long: Maximum 10000 characters allowed',
+            'status_code': 413
+        }
+    
+    return True, None
