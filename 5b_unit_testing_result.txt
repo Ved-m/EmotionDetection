@@ -1,0 +1,20 @@
+D:\vit\6 sem\coursera\project2>python -m unittest test_emotion_detection_mock.py -v
+test_emotion_detection_mock.py
+-m unittest test_emotion_detection_mock.py -v
+test_detect_emotion_formatting (test_emotion_detection_mock.TestEmotionDetection.test_detect_emotion_formatting)
+Test that emotion scores are properly formatted ... ok
+test_detect_emotion_response_structure (test_emotion_detection_mock.TestEmotionDetection.test_detect_emotion_response_structure)
+Test that response contains expected emotion categories ... ok
+test_detect_emotion_returns_dictionary (test_emotion_detection_mock.TestEmotionDetection.test_detect_emotion_returns_dictionary)
+Test that detect_emotion always returns a dictionary ... ok
+test_detect_emotion_score_range (test_emotion_detection_mock.TestEmotionDetection.test_detect_emotion_score_range)
+Test that emotion scores are in valid range (0-1) ... ok
+test_detect_emotion_with_empty_text (test_emotion_detection_mock.TestEmotionDetection.test_detect_emotion_with_empty_text)
+Test emotion detection with empty text ... ok
+test_detect_emotion_with_valid_text (test_emotion_detection_mock.TestEmotionDetection.test_detect_emotion_with_valid_text)
+Test emotion detection with valid text ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.230s
+
+OK
