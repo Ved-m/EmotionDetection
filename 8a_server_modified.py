@@ -3,11 +3,11 @@ Flask server for Emotion Detection API
 Web deployment of the Emotion Detection application using Flask
 Enhanced with type hints and static code analysis support
 """
-from typing import Dict, Tuple, Optional, Any
-from flask import Flask, request, jsonify, Response
-from EmotionDetection.emotion_detection import detect_emotion, validate_emotion_text
 import os
 import json
+from typing import Dict, Tuple, Optional, Any
+from flask import Flask, request, jsonify, Response
+from EmotionDetection.emotion_detection import detect_emotion
 
 
 # Flask application initialization
@@ -143,11 +143,12 @@ def emotion_detection() -> Tuple[Response, int]:
     text = data['text']
     
     # Validate text input
-    text_valid: bool
-    text_error: Optional[Dict[str, Any]]
-    text_valid, text_error = validate_emotion_text(text)
-    if not text_valid:
-        return jsonify(text_error), text_error.get('status_code', 400)
+    if isinstance(text, str) and len(text.strip()) == 0:
+        return jsonify({
+            'error': 'Invalid input: Text cannot be empty',
+            'status_code': 400,
+            'message': 'Bad Request - Text is empty'
+        }), 400
     
     # Detect emotions
     result = detect_emotion(text)
@@ -366,25 +367,25 @@ def code_structure() -> Response:
 
 
 @app.errorhandler(400)
-def bad_request(error: Exception) -> Tuple[Response, int]:
+def bad_request(_: Exception) -> Tuple[Response, int]:
     """
     Handle 400 Bad Request errors.
-    
+
     Args:
-        error: The exception that was raised
-    
+        _: The exception that was raised
+
     Returns:
         Tuple[Response, int]: Error response and status code
     """
     return jsonify({
         'error': 'Bad Request',
         'status_code': 400,
-        'message': str(error)
+        'message': 'Invalid request'
     }), 400
 
 
 @app.errorhandler(404)
-def not_found(error: Exception) -> Tuple[Response, int]:
+def not_found(_: Exception) -> Tuple[Response, int]:
     """
     Handle 404 Not Found errors.
     
@@ -402,13 +403,12 @@ def not_found(error: Exception) -> Tuple[Response, int]:
 
 
 @app.errorhandler(500)
-def server_error(error: Exception) -> Tuple[Response, int]:
+def server_error(_: Exception) -> Tuple[Response, int]:
     """
     Handle 500 Internal Server errors.
-    
+
     Args:
-        error: The exception that was raised
-    
+        _: The exception that was raised
     Returns:
         Tuple[Response, int]: Error response and status code
     """
