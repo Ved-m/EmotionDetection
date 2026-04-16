@@ -1,0 +1,49 @@
+D:\vit\6 sem\coursera\project2>python validate_package.py
+validate_package.py
+======================================================================
+EMOTION DETECTION PACKAGE VALIDATION TEST
+======================================================================
+
+Test 1: Python Environment
+----------------------------------------------------------------------
+✓ Python Version: 3.11.5 (tags/v3.11.5:cce6ba9, Aug 24 2023, 14:38:34) [MSC v.1936 64 bit (AMD64)]
+✓ Python Executable: C:\Users\Vedant\AppData\Local\Programs\Python\Python311\python.exe
+
+Test 2: Package Structure
+----------------------------------------------------------------------
+✓ Package directory exists: D:\vit\6 sem\coursera\project2\EmotionDetection
+✓ __init__.py file found: D:\vit\6 sem\coursera\project2\EmotionDetection\__init__.py
+✓ emotion_detection.py module found: D:\vit\6 sem\coursera\project2\EmotionDetection\emotion_detection.py
+
+Test 3: Package Import
+----------------------------------------------------------------------
+✓ Successfully imported EmotionDetection package
+  Package location: D:\vit\6 sem\coursera\project2\EmotionDetection\__init__.py
+
+Test 4: Module Import from Package
+----------------------------------------------------------------------
+✓ Successfully imported detect_emotion from EmotionDetection.emotion_detection
+
+Test 5: Package Attributes
+----------------------------------------------------------------------
+✓ Package version: 1.0.0
+✓ Package author: Emotion Detection Team
+✓ Package exports: ['detect_emotion']
+✓ Package __file__: D:\vit\6 sem\coursera\project2\EmotionDetection\__init__.py
+
+Test 6: Function Verification
+----------------------------------------------------------------------
+✓ Function name: detect_emotion
+✓ Function signature: detect_emotion(text)
+✓ Function docstring available: True
+
+======================================================================
+VALIDATION SUMMARY
+======================================================================
+✓ EmotionDetection is a VALID Python package
+✓ All required modules and files present
+✓ Package imports successfully
+✓ Functions are accessible and documented
+
+Status: PACKAGE VALIDATION PASSED ✓
+======================================================================
